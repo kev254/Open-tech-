@@ -1,2 +1,2 @@
-web: npm start --prefix frontend
+web: npm start
 api: node server/index.js
