@@ -24,7 +24,7 @@ const IssueForm = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:5000/api/issues/create', {
+      const response = await axios.post('https://taskmanager254-5453e6565697.herokuapp.com/api/issues/create', {
         issue,
         category,
         assigned_to: assignedTo,

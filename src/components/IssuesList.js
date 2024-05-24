@@ -7,7 +7,7 @@ const IssuesList = () => {
   useEffect(() => {
     const fetchIssues = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/issues');
+        const response = await axios.get('https://taskmanager254-5453e6565697.herokuapp.com/api/issues/create');
         setIssues(response.data);
       } catch (error) {
         console.error('Error fetching issues:', error);
