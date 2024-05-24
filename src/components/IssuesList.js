@@ -10,7 +10,7 @@ const IssuesList = () => {
         const response = await axios.get('https://taskmanager254-5453e6565697.herokuapp.com/api/issues/create');
         setIssues(response.data);
       } catch (error) {
-        console.error('Error fetching issues:', error);
+        console.error('Error fetching issuess:', error);
       }
     };
 
