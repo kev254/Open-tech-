@@ -24,7 +24,7 @@ const IssueForm = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post('http://zebex.me/api/issues/create', {
+      const response = await axios.post('https://zebex.me/api/issues/create', {
         issue,
         category,
         assigned_to: assignedTo,

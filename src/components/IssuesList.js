@@ -8,7 +8,7 @@ const IssuesList = () => {
   useEffect(() => {
     const fetchIssues = async () => {
       try {
-        const response = await axios.get('http://zebex.me/api/issues/');
+        const response = await axios.get('https://zebex.me/api/issues/');
         setIssues(response.data);
       } catch (error) {
         console.error('Error fetching issues:', error);
