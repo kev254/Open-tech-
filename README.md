@@ -38,4 +38,4 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 
 
-See the live preview [GO TO DEMO ](https://taskmanagerapp.zebex.me); 
+See the live preview [GO TO DEMO ](https://taskmanager.zebex.me/); 
