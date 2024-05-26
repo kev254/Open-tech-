@@ -24,7 +24,7 @@ const IssueForm = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post('https://taskmanager254-5453e6565697.herokuapp.com/api/issues/create', {
+      const response = await axios.post('http://zebex.me/api/issues/create', {
         issue,
         category,
         assigned_to: assignedTo,
@@ -34,16 +34,19 @@ const IssueForm = () => {
 
       emailjs.send('service_05yigkp', 'template_dtxy227', {
         to: complainantEmail,
+        to_name: "Customer",
+        reply_to:"info@opentechglobal.co.ke",
+        from_email: "info@opentechglobal.co.ke",
         tracking_number: response.data.tracking_number,
-        from_name: 'Task Management System',
-        message: `Your issue has been logged. Your tracking number is ${response.data.tracking_number}`,
+        from_name: 'Open Tech Task Management',
+        message: `${response.data.tracking_number}`,
       }, 'w9qTOqmVrugi8SSwF')
       .then((result) => {
         console.log(result.text);
         Swal.fire({
           icon: 'success',
-          title: 'Email Sent',
-          text: `The email has been sent to ${complainantEmail}`,
+          title: 'Task Added !',
+          text: `The tracking number sent to ${complainantEmail}`,
         }).then((confirm) => {
           if (confirm.isConfirmed) {
             navigate('/issues');
@@ -65,29 +68,8 @@ const IssueForm = () => {
       <div className="row justify-content-center mt-5">
         <div className="col-lg-6">
           <form onSubmit={handleSubmit} className="p-4 border rounded">
-            <h2 className="mb-4">Report an Issue</h2>
-            <div className="mb-3">
-              <label htmlFor="issue" className="form-label">Issue:</label>
-              <input type="text" id="issue" className="form-control" value={issue} onChange={(e) => setIssue(e.target.value)} required />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="category" className="form-label">Category:</label>
-              <select id="category" className="form-select" value={category} onChange={(e) => setCategory(e.target.value)} required>
-                <option value="">Select Category</option>
-                <option value="Category 1">Category 1</option>
-                <option value="Category 2">Category 2</option>
-                {/* Add more options as needed */}
-              </select>
-            </div>
-            <div className="mb-3">
-              <label htmlFor="assignedTo" className="form-label">Assign To:</label>
-              <select id="assignedTo" className="form-select" value={assignedTo} onChange={(e) => setAssignedTo(e.target.value)} required>
-                <option value="">Select Assignee</option>
-                <option value="Assignee 1">Assignee 1</option>
-                <option value="Assignee 2">Assignee 2</option>
-                {/* Add more options as needed */}
-              </select>
-            </div>
+            <h2 className="mb-4">Task management system</h2>
+
             <div className="mb-3">
               <label htmlFor="complainantEmail" className="form-label">Complainant Email:</label>
               <input type="email" id="complainantEmail" className="form-control" value={complainantEmail} onChange={(e) => setComplainantEmail(e.target.value)} required />
@@ -96,9 +78,47 @@ const IssueForm = () => {
               <label htmlFor="complainantPhone" className="form-label">Complainant Phone:</label>
               <input type="number" id="complainantPhone" className="form-control" value={complainantPhone} onChange={(e) => setComplainantPhone(e.target.value)} required />
             </div>
+            
+            <div className="mb-3">
+              <label htmlFor="issue" className="form-label">Issue Raised:</label>
+              <textarea 
+                id="issue" 
+                className="form-control" 
+                value={issue} 
+                onChange={(e) => setIssue(e.target.value)} 
+                required 
+                rows="4"
+              ></textarea>
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="category" className="form-label">Category of the issue:</label>
+              <select id="category" className="form-select" value={category} onChange={(e) => setCategory(e.target.value)} required>
+                <option value="">Select Category</option>
+                <option value="System Downtime">System Downtime</option>
+                <option value="Unresponsive system">Unresponsive system</option>
+                <option value="Haradware replacement">Haradware replacement</option>
+                <option value="Software instalation">Software instalation</option>
+                <option value="Systmem update">Systmem update</option>
+                <option value="Database recovery">Database recovery</option>
+                <option value="Other">Other</option>
+                {/* Add more options as needed */}
+              </select>
+            </div>
+            <div className="mb-3">
+              <label htmlFor="assignedTo" className="form-label">Assign To:</label>
+              <select id="assignedTo" className="form-select" value={assignedTo} onChange={(e) => setAssignedTo(e.target.value)} required>
+                <option value="">Select Staff</option>
+                <option value="Main Njeru">Maina Njeru</option>
+                <option value="Daltone Kioko">Daltone Kioko</option>
+                <option value="Faith Mwendwa">Faith Mwendwa</option>
+                <option value="Allan Kiplangat">Allan Kiplangat</option>
+                {/* Add more options as needed */}
+              </select>
+            </div>
             <div className="text-end">
-              <button type="submit" className="btn btn-danger" disabled={loading}>
-                {loading ? 'Submitting...' : 'Submit'}
+              <button type="submit" className="btn btn-success" disabled={loading}>
+                {loading ? 'Submitting...' : 'Create task'}
               </button>
             </div>
           </form>

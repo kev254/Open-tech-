@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const IssuesList = () => {
   const [issues, setIssues] = useState([]);
@@ -7,10 +8,10 @@ const IssuesList = () => {
   useEffect(() => {
     const fetchIssues = async () => {
       try {
-        const response = await axios.get('https://taskmanager254-5453e6565697.herokuapp.com/api/issues/create');
+        const response = await axios.get('http://zebex.me/api/issues/');
         setIssues(response.data);
       } catch (error) {
-        console.error('Error fetching issuess:', error);
+        console.error('Error fetching issues:', error);
       }
     };
 
@@ -19,7 +20,17 @@ const IssuesList = () => {
 
   return (
     <div className="container mt-5">
-      <h2>Issues List</h2>
+      <div class="row">
+        <div class="col-6">
+          <h2>Tasks List</h2>
+        </div>
+        <div class="col-6 text-end">
+          <a href="/"><button class="btn btn-success">Add Task</button></a>
+        </div>
+
+      </div>
+      
+      <div calss="card bg-grey">
       <table className="table table-striped">
         <thead>
           <tr>
@@ -30,6 +41,7 @@ const IssuesList = () => {
             <th>Complainant Phone</th>
             <th>Tracking Number</th>
             <th>Status</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -42,10 +54,18 @@ const IssuesList = () => {
               <td>{issue.complainant_phone}</td>
               <td>{issue.tracking_number}</td>
               <td>{issue.status}</td>
+              <td>
+                <Link to={`/issue/${issue.tracking_number}`} className="btn btn-danger">
+                  Delete
+                </Link>
+              </td>
             </tr>
           ))}
         </tbody>
       </table>
+
+      </div>
+      
     </div>
   );
 };
